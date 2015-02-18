@@ -50,7 +50,32 @@ namespace DBDiff.Front
             this.tabControl1.SelectedIndexChanged += new EventHandler(tabControl1_SelectedIndexChanged);
             this.Text += Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
+        #region Srinck visibal of control solution
+        int originalExStyle = -1;
+        bool enableFormLevelDoubleBuffering = true;
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                if (originalExStyle == -1)
+                    originalExStyle = base.CreateParams.ExStyle;
 
+                CreateParams cp = base.CreateParams;
+                if (enableFormLevelDoubleBuffering)
+                    cp.ExStyle |= 0x02000000;   // WS_EX_COMPOSITED
+                else
+                    cp.ExStyle = originalExStyle;
+
+                return cp;
+            }
+        }
+
+        public void TurnOffFormLevelDoubleBuffering()
+        {
+            enableFormLevelDoubleBuffering = false;
+            this.MaximizeBox = true;
+        }
+        #endregion
         /*private void ProcesarSybase()
         {
             DBDiff.Schema.Sybase.Model.Database origen;

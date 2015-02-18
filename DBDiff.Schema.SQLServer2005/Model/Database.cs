@@ -212,7 +212,7 @@ namespace DBDiff.Schema.SQLServer.Generates.Model
             listDiff.Add(new SQLScript(String.Format(@"/*
 
     Open DBDiff {0}
-    http://opendbiff.codeplex.com/
+    Manoj Kumar Mahato
 
     Script created by {1}\{2} on {3} at {4}.
 
